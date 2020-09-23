@@ -35,7 +35,7 @@ class DialogRouter {
     let dialog = this[_getComponent](name);
     if (!dialog) {
       throw new Error(
-        `[dialog-router]: 名为"${name}"的 dialog 组件，未找到，请检查。`
+        `[vue-dialogs-router]: 名为"${name}"的 dialog 组件，未找到，请检查。`
       );
     }
     if (isFn(dialog)) {

@@ -1,4 +1,4 @@
-## vue-dialog-router v0.1.0
+## vue-vue-dialogs-router v0.1.1
 
 dialog router，类 vue-router 的方式管理 dialog，类 component 的方式使用 dialog。
 
@@ -24,7 +24,12 @@ npm i vue-dialogs-router -S
 | closeAll  | 关闭全部 dialog                                                                                                                                   | 无                                                                                                                                                                                                                         |
 | getDialog | 用来获取 dialog 实例，这是一个同步方法，因为视图渲染 或 懒加载的原因，可能会无法获取到实例，需要自行把握调用时机，建议在 push callBack 里获取实例 | uid 为 push 时返回的唯一值                                                                                                                                                                                                 |
 
+## Notes
+
+Vue.use(DialogRouter, {key: 'show'})，这里的 key 即为控制 dialog 是否显示的变量。默认为 show。dialog 组件里必须要有这个 key 
+
 ## Usage
+
 ```js
 // main.js
 import Vue from "vue";
@@ -100,5 +105,24 @@ export default {
         },
     }
 }
+</script>
+```
+
+```vue
+<template>
+  <el-dialog :visible.sync="show" title="dialog3">
+    这是通过 v-dialog 打开的 dialog
+  </el-dialog>
+</template>
+
+<script>
+export default {
+  name: "dialog_3",
+  data() {
+    return {
+      show: false,
+    };
+  },
+};
 </script>
 ```

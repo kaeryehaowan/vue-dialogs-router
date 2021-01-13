@@ -108,7 +108,64 @@ DialogRouter.install = function (Vue, { key = "show" } = {}) {
     mounted() {
       if (this.$options.dialogRouter && this.$root === this) {
         let _this = this;
-        const container = new Vue({
+        // 注入 root.$options ，需要排除 dialogRouter、各生命周期、各数据选项等，需要留下 router,store等
+        const removeOptions = [
+          // 数据类
+          'data',
+          'props',
+          'propsData',
+          'computed',
+          'methods',
+          'watch',
+          // DOM
+          'el',
+          'template',
+          'render',
+          'renderError',
+          // 生命周期钩子
+          'beforeCreate',
+          'created',
+          'beforeMount',
+          'mounted',
+          'beforeUpdate',
+          'updated',
+          'activated',
+          'deactivated',
+          'beforeDestroy',
+          'destroyed',
+          'errorCaptured',
+          'beforeDestroy',
+          'beforeDestroy',
+          // 资源
+          'directives',
+          'filters',
+          'components',
+          // 组合
+          'parent',
+          'mixins',
+          'extends',
+          'provide',
+          'inject',
+          // 其它
+          'name',
+          'delimiters',
+          'functional',
+          'model',
+          'inheritAttrs',
+          'comments',
+          '_base',
+          // dialogRouter 防循环引用
+          'dialogRouter'
+        ]
+        const _rootOptions = {}
+        Object.keys(this.$options).forEach(k => {
+          if(!~removeOptions.indexOf(k)) {
+            _rootOptions[k] = this.$options[k]
+          }
+        })
+        const container = new Vue(Object.assign(_rootOptions,{
+          router: this.$options.router,
+          store: this.$options.store,
           render(h) {
             const dialogList = _this.$root._dialogComponents;
             return h(
@@ -124,7 +181,7 @@ DialogRouter.install = function (Vue, { key = "show" } = {}) {
               })
             );
           },
-        }).$mount();
+        })).$mount();
         document.body.appendChild(container.$el);
       }
     },

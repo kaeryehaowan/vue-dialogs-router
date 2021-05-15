@@ -163,6 +163,11 @@ DialogRouter.install = function (Vue, { key = "show" } = {}) {
             _rootOptions[k] = this.$options[k]
           }
         })
+        Object.defineProperty(Vue.prototype, '$dialogRouter', {
+          get () {
+            return root.$dialogRouter
+          }
+        })
         const container = new Vue(Object.assign(_rootOptions,{
           router: this.$options.router,
           store: this.$options.store,

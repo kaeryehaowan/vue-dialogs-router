@@ -1,4 +1,4 @@
-## vue-vue-dialogs-router v0.1.1
+## vue-vue-dialogs-router v0.3.1
 
 dialog router，类 vue-router 的方式管理 dialog，类 component 的方式使用 dialog。
 
@@ -8,6 +8,7 @@ dialog router，类 vue-router 的方式管理 dialog，类 component 的方式�
 - 可通过 uid（dialog 唯一返回值），获取到 dialogComponent 的组件实例。
 - 可通过 uid 关闭指定的 dialog。
 - 可通过 v-dialog 指令打开 dialog。
+- v0.3.0增加了可以在 dialog实例页面里，调用 this.$dialogRouter 
 
 ## Installation
 
@@ -17,12 +18,12 @@ npm i vue-dialogs-router -S
 
 ## Methods
 
-| 方法      | 说明                                                                                                                                              | 参数                                                                                                                                                                                                                       |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| push      | 类似 vue-router 的 push，用来打开一个 dialog 组件。this.\$dialogRouter.push({name,props,on},callBack)                                             | name[type=String]为 dialogRouter 里注册时的 name 值，props[type=Object]为需要传入到 dialog 的属性，on[type=Object]为注册的 event；callBack 为打开 dialog 之后的回调，它有两个参数，一个为 dialogComponent 实例，一个为 uid |
-| close     | 可通过 uid 来关闭 dialog。this.\$dialogRouter.close(uid)                                                                                          | uid 为 push 时返回的唯一值                                                                                                                                                                                                 |
-| closeAll  | 关闭全部 dialog                                                                                                                                   | 无                                                                                                                                                                                                                         |
-| getDialog | 用来获取 dialog 实例，这是一个同步方法，因为视图渲染 或 懒加载的原因，可能会无法获取到实例，需要自行把握调用时机，建议在 push callBack 里获取实例 | uid 为 push 时返回的唯一值                                                                                                                                                                                                 |
+| 方法      | 说明                                                                                                                                         | 参数                                                                                                                                                                                                                 |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| push      | 类似 vue-router 的 push，用来打开一个 dialog 组件。this.\$dialogRouter.push({name,props,on},callBack)                                          | name[type=String]为 dialogRouter 里注册时的 name 值，props[type=Object]为需要传入到 dialog 的属性，on[type=Object]为注册的 event；callBack 为打开 dialog 之后的回调，它有两个参数，一个为 dialogComponent 实例，一个为 uid |
+| close     | 可通过 uid 来关闭 dialog。this.\$dialogRouter.close(uid)                                                                                      | uid 为 push 时返回的唯一值                                                                                                                                                                                           |
+| closeAll  | 关闭全部 dialog                                                                                                                              | 无                                                                                                                                                                                                                   |
+| getDialog | 用来获取 dialog 实例，这是一个同步方法，因为视图渲染 或 懒加载的原因，可能会无法获取到实例，需要自行把握调用时机，建议在 push callBack 里获取实例 | uid 为 push 时返回的唯一值                                                                                                                                                                                           |
 
 ## Notes
 
